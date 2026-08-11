@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NetMatik - YKS Hesaplama</title>
+<title>NetMatik | YKS Hesaplama</title>
 
 <style>
 * {
@@ -22,36 +22,52 @@ header {
     background: #3157d5;
     color: white;
     text-align: center;
-    padding: 30px 20px;
+    padding: 30px 15px;
 }
 
 header h1 {
-    font-size: 38px;
+    font-size: 36px;
     margin-bottom: 8px;
 }
 
 .container {
-    max-width: 900px;
-    margin: 30px auto;
+    max-width: 950px;
+    margin: auto;
     padding: 20px;
+}
+
+.info {
+    background: white;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.07);
+}
+
+.info input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
 .section {
     background: white;
-    padding: 25px;
+    padding: 22px;
     border-radius: 18px;
-    margin-bottom: 25px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 22px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
 }
 
 .section h2 {
     color: #3157d5;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .subject {
     display: grid;
-    grid-template-columns: 1fr 100px 100px 100px;
+    grid-template-columns: 1fr 90px 90px 90px;
     gap: 10px;
     align-items: center;
     margin-bottom: 12px;
@@ -59,54 +75,62 @@ header h1 {
 
 .subject input {
     width: 100%;
-    padding: 10px;
+    padding: 9px 5px;
     border: 1px solid #ddd;
     border-radius: 8px;
     text-align: center;
 }
 
 .net {
-    font-weight: bold;
     text-align: center;
+    font-weight: bold;
     color: #3157d5;
 }
 
 button {
+    display: block;
+    margin: 10px auto 25px;
     background: #3157d5;
     color: white;
-    border: none;
-    padding: 14px 25px;
+    border: 0;
+    padding: 15px 28px;
     border-radius: 10px;
     font-size: 17px;
     font-weight: bold;
     cursor: pointer;
 }
 
-button:hover {
-    background: #2443aa;
-}
-
 .result {
     display: none;
     background: #eaf0ff;
     padding: 25px;
-    border-radius: 15px;
-    margin-top: 20px;
+    border-radius: 18px;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .result h2 {
     color: #3157d5;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-@media (max-width: 650px) {
+.result p {
+    margin: 8px;
+    font-size: 18px;
+}
+
+.warning {
+    font-size: 13px !important;
+    color: #666;
+}
+
+@media(max-width:650px) {
     .subject {
-        grid-template-columns: 1fr 70px 70px 70px;
+        grid-template-columns: 1fr 65px 65px 65px;
     }
 
     .subject input {
-        padding: 8px 3px;
+        padding: 8px 2px;
     }
 }
 </style>
@@ -116,172 +140,261 @@ button:hover {
 
 <header>
     <h1>🎓 NetMatik</h1>
-    <p>YKS Net Hesaplama Merkezi</p>
+    <p>YKS Net ve Puan Tahmini</p>
 </header>
 
 <div class="container">
 
-    <div class="section">
-        <h2>🎯 TYT</h2>
+<div class="info">
+    <strong>👤 OBP</strong>
+    <input
+        type="number"
+        id="obp"
+        min="0"
+        max="500"
+        placeholder="OBP'nizi girin (0-500)">
+</div>
 
-        <div class="subject">
-            <strong>Ders</strong>
-            <strong>Doğru</strong>
-            <strong>Yanlış</strong>
-            <strong>Net</strong>
-        </div>
+<div class="section">
+<h2>🎯 TYT</h2>
 
-        <div class="subject">
-            <span>Türkçe</span>
-            <input type="number" id="tytTurkceD" min="0">
-            <input type="number" id="tytTurkceY" min="0">
-            <span class="net" id="tytTurkceN">0</span>
-        </div>
+<div class="subject">
+    <strong>Ders</strong>
+    <strong>Doğru</strong>
+    <strong>Yanlış</strong>
+    <strong>Net</strong>
+</div>
 
-        <div class="subject">
-            <span>Matematik</span>
-            <input type="number" id="tytMatD" min="0">
-            <input type="number" id="tytMatY" min="0">
-            <span class="net" id="tytMatN">0</span>
-        </div>
+<div class="subject">
+    <span>Türkçe</span>
+    <input type="number" id="tytTurkceD" min="0" max="40">
+    <input type="number" id="tytTurkceY" min="0" max="40">
+    <span class="net" id="tytTurkceN">0</span>
+</div>
 
-        <div class="subject">
-            <span>Sosyal Bilimler</span>
-            <input type="number" id="tytSosyalD" min="0">
-            <input type="number" id="tytSosyalY" min="0">
-            <span class="net" id="tytSosyalN">0</span>
-        </div>
+<div class="subject">
+    <span>Matematik</span>
+    <input type="number" id="tytMatD" min="0" max="40">
+    <input type="number" id="tytMatY" min="0" max="40">
+    <span class="net" id="tytMatN">0</span>
+</div>
 
-        <div class="subject">
-            <span>Fen Bilimleri</span>
-            <input type="number" id="tytFenD" min="0">
-            <input type="number" id="tytFenY" min="0">
-            <span class="net" id="tytFenN">0</span>
-        </div>
-    </div>
+<div class="subject">
+    <span>Sosyal Bilimler</span>
+    <input type="number" id="tytSosyalD" min="0" max="20">
+    <input type="number" id="tytSosyalY" min="0" max="20">
+    <span class="net" id="tytSosyalN">0</span>
+</div>
 
-    <div class="section">
-        <h2>📚 AYT</h2>
+<div class="subject">
+    <span>Fen Bilimleri</span>
+    <input type="number" id="tytFenD" min="0" max="20">
+    <input type="number" id="tytFenY" min="0" max="20">
+    <span class="net" id="tytFenN">0</span>
+</div>
 
-        <div class="subject">
-            <strong>Ders</strong>
-            <strong>Doğru</strong>
-            <strong>Yanlış</strong>
-            <strong>Net</strong>
-        </div>
+</div>
 
-        <div class="subject">
-            <span>Matematik</span>
-            <input type="number" id="aytMatD" min="0">
-            <input type="number" id="aytMatY" min="0">
-            <span class="net" id="aytMatN">0</span>
-        </div>
+<div class="section">
+<h2>📚 AYT - Sayısal</h2>
 
-        <div class="subject">
-            <span>Edebiyat-Sosyal 1</span>
-            <input type="number" id="aytEdebD" min="0">
-            <input type="number" id="aytEdebY" min="0">
-            <span class="net" id="aytEdebN">0</span>
-        </div>
+<div class="subject">
+    <strong>Ders</strong>
+    <strong>Doğru</strong>
+    <strong>Yanlış</strong>
+    <strong>Net</strong>
+</div>
 
-        <div class="subject">
-            <span>Fen Bilimleri</span>
-            <input type="number" id="aytFenD" min="0">
-            <input type="number" id="aytFenY" min="0">
-            <span class="net" id="aytFenN">0</span>
-        </div>
+<div class="subject">
+    <span>Matematik</span>
+    <input type="number" id="aytMatD" min="0" max="40">
+    <input type="number" id="aytMatY" min="0" max="40">
+    <span class="net" id="aytMatN">0</span>
+</div>
 
-        <div class="subject">
-            <span>Sosyal Bilimler 2</span>
-            <input type="number" id="aytSosyalD" min="0">
-            <input type="number" id="aytSosyalY" min="0">
-            <span class="net" id="aytSosyalN">0</span>
-        </div>
-    </div>
+<div class="subject">
+    <span>Fen Bilimleri</span>
+    <input type="number" id="aytFenD" min="0" max="40">
+    <input type="number" id="aytFenY" min="0" max="40">
+    <span class="net" id="aytFenN">0</span>
+</div>
 
-    <div style="text-align:center;">
-        <button onclick="hesapla()">🧮 Netlerimi Hesapla</button>
-    </div>
+</div>
 
-    <div class="result" id="sonuc">
-        <h2>🎉 Sonuçların</h2>
-        <p id="tytSonuc"></p>
-        <p id="aytSonuc"></p>
-        <p><strong>Not:</strong> Net hesabı 4 yanlış = 1 doğru şeklindedir.</p>
-    </div>
+<div class="section">
+<h2>📖 AYT - Eşit Ağırlık / Sözel</h2>
+
+<div class="subject">
+    <strong>Ders</strong>
+    <strong>Doğru</strong>
+    <strong>Yanlış</strong>
+    <strong>Net</strong>
+</div>
+
+<div class="subject">
+    <span>Edebiyat</span>
+    <input type="number" id="aytEdebD" min="0" max="24">
+    <input type="number" id="aytEdebY" min="0" max="24">
+    <span class="net" id="aytEdebN">0</span>
+</div>
+
+<div class="subject">
+    <span>Tarih-1</span>
+    <input type="number" id="aytTarih1D" min="0" max="10">
+    <input type="number" id="aytTarih1Y" min="0" max="10">
+    <span class="net" id="aytTarih1N">0</span>
+</div>
+
+<div class="subject">
+    <span>Coğrafya-1</span>
+    <input type="number" id="aytCografya1D" min="0" max="6">
+    <input type="number" id="aytCografya1Y" min="0" max="6">
+    <span class="net" id="aytCografya1N">0</span>
+</div>
+
+<div class="subject">
+    <span>Tarih-2</span>
+    <input type="number" id="aytTarih2D" min="0" max="11">
+    <input type="number" id="aytTarih2Y" min="0" max="11">
+    <span class="net" id="aytTarih2N">0</span>
+</div>
+
+<div class="subject">
+    <span>Coğrafya-2</span>
+    <input type="number" id="aytCografya2D" min="0" max="11">
+    <input type="number" id="aytCografya2Y" min="0" max="11">
+    <span class="net" id="aytCografya2N">0</span>
+</div>
+
+</div>
+
+<button onclick="hesapla()">🧮 SONUÇLARI HESAPLA</button>
+
+<div class="result" id="sonuc">
+
+<h2>🎉 Sonuçların</h2>
+
+<p id="tytToplam"></p>
+<p id="aytSayisal"></p>
+<p id="aytEaSoz"></p>
+
+<p class="warning">
+⚠️ Bu sonuçlar net hesabına dayalı yaklaşık değerlerdir.
+Resmî ÖSYM puanı değildir.
+</p>
+
+</div>
 
 </div>
 
 <script>
-function netHesapla(d, y) {
-    d = Number(d) || 0;
-    y = Number(y) || 0;
-    return d - (y / 4);
+
+function net(d,y) {
+    return (Number(d)||0) - ((Number(y)||0) / 4);
 }
 
 function hesapla() {
 
-    let tytTurkce = netHesapla(
-        document.getElementById("tytTurkceD").value,
-        document.getElementById("tytTurkceY").value
+    let tytTurkce = net(
+        tytTurkceD.value,
+        tytTurkceY.value
     );
 
-    let tytMat = netHesapla(
-        document.getElementById("tytMatD").value,
-        document.getElementById("tytMatY").value
+    let tytMat = net(
+        tytMatD.value,
+        tytMatY.value
     );
 
-    let tytSosyal = netHesapla(
-        document.getElementById("tytSosyalD").value,
-        document.getElementById("tytSosyalY").value
+    let tytSosyal = net(
+        tytSosyalD.value,
+        tytSosyalY.value
     );
 
-    let tytFen = netHesapla(
-        document.getElementById("tytFenD").value,
-        document.getElementById("tytFenY").value
+    let tytFen = net(
+        tytFenD.value,
+        tytFenY.value
     );
 
-    let aytMat = netHesapla(
-        document.getElementById("aytMatD").value,
-        document.getElementById("aytMatY").value
+    let aytMat = net(
+        aytMatD.value,
+        aytMatY.value
     );
 
-    let aytEdeb = netHesapla(
-        document.getElementById("aytEdebD").value,
-        document.getElementById("aytEdebY").value
+    let aytFen = net(
+        aytFenD.value,
+        aytFenY.value
     );
 
-    let aytFen = netHesapla(
-        document.getElementById("aytFenD").value,
-        document.getElementById("aytFenY").value
+    let aytEdeb = net(
+        aytEdebD.value,
+        aytEdebY.value
     );
 
-    let aytSosyal = netHesapla(
-        document.getElementById("aytSosyalD").value,
-        document.getElementById("aytSosyalY").value
+    let aytTarih1 = net(
+        aytTarih1D.value,
+        aytTarih1Y.value
     );
 
-    document.getElementById("tytTurkceN").textContent = tytTurkce.toFixed(2);
-    document.getElementById("tytMatN").textContent = tytMat.toFixed(2);
-    document.getElementById("tytSosyalN").textContent = tytSosyal.toFixed(2);
-    document.getElementById("tytFenN").textContent = tytFen.toFixed(2);
+    let aytCografya1 = net(
+        aytCografya1D.value,
+        aytCografya1Y.value
+    );
 
-    document.getElementById("aytMatN").textContent = aytMat.toFixed(2);
-    document.getElementById("aytEdebN").textContent = aytEdeb.toFixed(2);
-    document.getElementById("aytFenN").textContent = aytFen.toFixed(2);
-    document.getElementById("aytSosyalN").textContent = aytSosyal.toFixed(2);
+    let aytTarih2 = net(
+        aytTarih2D.value,
+        aytTarih2Y.value
+    );
 
-    let toplamTyt = tytTurkce + tytMat + tytSosyal + tytFen;
-    let toplamAyt = aytMat + aytEdeb + aytFen + aytSosyal;
+    let aytCografya2 = net(
+        aytCografya2D.value,
+        aytCografya2Y.value
+    );
 
-    document.getElementById("tytSonuc").textContent =
-        "TYT Toplam Net: " + toplamTyt.toFixed(2);
+    tytTurkceN.textContent = tytTurkce.toFixed(2);
+    tytMatN.textContent = tytMat.toFixed(2);
+    tytSosyalN.textContent = tytSosyal.toFixed(2);
+    tytFenN.textContent = tytFen.toFixed(2);
 
-    document.getElementById("aytSonuc").textContent =
-        "AYT Toplam Net: " + toplamAyt.toFixed(2);
+    aytMatN.textContent = aytMat.toFixed(2);
+    aytFenN.textContent = aytFen.toFixed(2);
+    aytEdebN.textContent = aytEdeb.toFixed(2);
+    aytTarih1N.textContent = aytTarih1.toFixed(2);
+    aytCografya1N.textContent = aytCografya1.toFixed(2);
+    aytTarih2N.textContent = aytTarih2.toFixed(2);
+    aytCografya2N.textContent = aytCografya2.toFixed(2);
 
-    document.getElementById("sonuc").style.display = "block";
+    let toplamTyt =
+        tytTurkce +
+        tytMat +
+        tytSosyal +
+        tytFen;
+
+    let toplamSayisal =
+        aytMat +
+        aytFen;
+
+    let toplamEaSoz =
+        aytEdeb +
+        aytTarih1 +
+        aytCografya1 +
+        aytTarih2 +
+        aytCografya2;
+
+    tytToplam.textContent =
+        "🎯 TYT Toplam Net: " +
+        toplamTyt.toFixed(2);
+
+    aytSayisal.textContent =
+        "🔢 AYT Sayısal Net: " +
+        toplamSayisal.toFixed(2);
+
+    aytEaSoz.textContent =
+        "📖 AYT Eşit Ağırlık / Sözel Net: " +
+        toplamEaSoz.toFixed(2);
+
+    sonuc.style.display = "block";
 }
+
 </script>
 
 </body>

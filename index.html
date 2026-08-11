@@ -508,31 +508,47 @@ hesapla = function() {
 };
 </script>
  <script>
-function soruKontrol() {
-    const dersler = [
-        ["tytTurkceD", "tytTurkceY", 40],
-        ["tytMatD", "tytMatY", 40],
-        ["tytSosyalD", "tytSosyalY", 20],
-        ["tytFenD", "tytFenY", 20],
-        ["aytMatD", "aytMatY", 40],
-        ["aytFenD", "aytFenY", 40],
-        ["aytEdebD", "aytEdebY", 24],
-        ["aytTarih1D", "aytTarih1Y", 10],
-        ["aytCografya1D", "aytCografya1Y", 6]
-    ];
+<script>
+const soruSayilari = {
+    tytTurkceD: 40,
+    tytTurkceY: 40,
+    tytMatD: 40,
+    tytMatY: 40,
+    tytSosyalD: 20,
+    tytSosyalY: 20,
+    tytFenD: 20,
+    tytFenY: 20,
 
-    for (const ders of dersler) {
-        const dogru = Number(document.getElementById(ders[0]).value) || 0;
-        const yanlis = Number(document.getElementById(ders[1]).value) || 0;
+    aytMatD: 40,
+    aytMatY: 40,
+    aytFenD: 40,
+    aytFenY: 40,
+    aytEdebD: 24,
+    aytEdebY: 24,
+    aytTarih1D: 10,
+    aytTarih1Y: 10,
+    aytCografya1D: 6,
+    aytCografya1Y: 6
+};
 
-        if (dogru + yanlis > ders[2]) {
-            alert("❌ Doğru + yanlış toplamı soru sayısından fazla olamaz!");
-            return false;
-        }
+Object.keys(soruSayilari).forEach(function(id) {
+    const input = document.getElementById(id);
+
+    if (input) {
+        input.addEventListener("input", function() {
+            const max = soruSayilari[id];
+
+            if (Number(this.value) > max) {
+                this.value = max;
+                alert("❌ Bu derste en fazla " + max + " soru var!");
+            }
+
+            if (Number(this.value) < 0) {
+                this.value = 0;
+            }
+        });
     }
-
-    return true;
-}
-</script>   
+});
+</script>
 </body>
 </html>

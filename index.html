@@ -550,5 +550,46 @@ Object.keys(soruSayilari).forEach(function(id) {
     }
 });
 </script>
+<script>
+document.addEventListener("input", function(e) {
+
+    const limitler = {
+        tytTurkceD: 40,
+        tytTurkceY: 40,
+        tytMatD: 40,
+        tytMatY: 40,
+        tytSosyalD: 20,
+        tytSosyalY: 20,
+        tytFenD: 20,
+        tytFenY: 20,
+
+        aytMatD: 40,
+        aytMatY: 40,
+        aytFenD: 40,
+        aytFenY: 40,
+        aytEdebD: 24,
+        aytEdebY: 24,
+        aytTarih1D: 10,
+        aytTarih1Y: 10,
+        aytCografya1D: 6,
+        aytCografya1Y: 6
+    };
+
+    if (limitler[e.target.id] !== undefined) {
+
+        const limit = limitler[e.target.id];
+        let deger = Number(e.target.value);
+
+        if (deger > limit) {
+            e.target.value = limit;
+            alert("Bu alana en fazla " + limit + " yazabilirsin.");
+        }
+
+        if (deger < 0) {
+            e.target.value = 0;
+        }
+    }
+});
+</script>
 </body>
 </html>

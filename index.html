@@ -3,10 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NetMatik | Öğrenci Hesaplama Merkezi</title>
+
+<title>NetMatik | YKS Hesaplama Merkezi</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
 body{
     font-family:Arial,sans-serif;
@@ -45,24 +50,9 @@ header h1{
     margin-bottom:18px;
 }
 
-.info{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    margin-bottom:20px;
-}
-
-.info input{
-    width:100%;
-    padding:12px;
-    margin-top:8px;
-    border:1px solid #ddd;
-    border-radius:8px;
-}
-
 .subject{
     display:grid;
-    grid-template-columns:1fr 90px 90px 90px;
+    grid-template-columns:1fr 80px 80px 80px;
     gap:10px;
     align-items:center;
     margin-bottom:12px;
@@ -70,7 +60,7 @@ header h1{
 
 .subject input{
     width:100%;
-    padding:9px 5px;
+    padding:9px 4px;
     border:1px solid #ddd;
     border-radius:8px;
     text-align:center;
@@ -82,62 +72,64 @@ header h1{
     color:#3157d5;
 }
 
-button{
-    display:block;
+.info input,
+.search{
     width:100%;
-    margin:10px auto 25px;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:9px;
+    margin-top:8px;
+}
+
+button{
+    width:100%;
     background:#3157d5;
     color:white;
     border:0;
-    padding:15px 28px;
+    padding:15px;
     border-radius:10px;
     font-size:17px;
     font-weight:bold;
     cursor:pointer;
+    margin:10px 0;
+}
+
+.hata{
+    display:none;
+    background:#ffe5e5;
+    color:#b00020;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
 }
 
 .result{
     display:none;
     background:#eaf0ff;
-    padding:25px;
+    padding:22px;
     border-radius:18px;
-    margin-bottom:30px;
-}
-
-.result h2{
-    color:#3157d5;
-    margin-bottom:15px;
-}
-
-.result p{
-    margin:10px 0;
-    font-size:18px;
-}
-
-.hata{
-    background:#ffe8e8;
-    color:#b00020;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:15px;
-    display:none;
+    margin-bottom:25px;
 }
 
 .kart{
     background:white;
     padding:18px;
-    margin:12px 0;
     border-radius:14px;
+    margin:12px 0;
     border-left:5px solid #3157d5;
+}
+
+.kart h3{
+    margin-bottom:8px;
+}
+
+.kart p{
+    margin:6px 0;
 }
 
 @media(max-width:650px){
     .subject{
-        grid-template-columns:1fr 65px 65px 65px;
-    }
-
-    .subject input{
-        padding:8px 2px;
+        grid-template-columns:1fr 60px 60px 60px;
     }
 }
 </style>
@@ -147,24 +139,29 @@ button{
 
 <header>
     <h1>🎓 NetMatik</h1>
-    <p>YKS Net ve Üniversite Tercih Merkezi</p>
+    <p>YKS Net ve Üniversite Hesaplama Merkezi</p>
 </header>
 
 <div class="container">
 
-<div class="info">
-    <strong>👤 OBP</strong>
-    <input
-        type="number"
-        id="obp"
-        min="0"
-        max="500"
-        placeholder="OBP'nizi girin (0-500)">
+<div class="section">
+
+<h2>👤 OBP</h2>
+
+<input
+    type="number"
+    id="obp"
+    min="0"
+    max="500"
+    placeholder="OBP'nizi girin (0-500)"
+>
+
 </div>
 
 <div id="hata" class="hata"></div>
 
 <div class="section">
+
 <h2>🎯 TYT</h2>
 
 <div class="subject">
@@ -176,229 +173,160 @@ button{
 
 <div class="subject">
 <span>Türkçe</span>
-<input type="number" id="tytTurkceD" min="0" max="40">
-<input type="number" id="tytTurkceY" min="0" max="40">
+<input id="tytTurkceD" type="number" min="0" max="40">
+<input id="tytTurkceY" type="number" min="0" max="40">
 <span class="net" id="tytTurkceN">0</span>
 </div>
 
 <div class="subject">
 <span>Matematik</span>
-<input type="number" id="tytMatD" min="0" max="40">
-<input type="number" id="tytMatY" min="0" max="40">
+<input id="tytMatD" type="number" min="0" max="40">
+<input id="tytMatY" type="number" min="0" max="40">
 <span class="net" id="tytMatN">0</span>
 </div>
 
 <div class="subject">
-<span>Sosyal Bilimler</span>
-<input type="number" id="tytSosyalD" min="0" max="20">
-<input type="number" id="tytSosyalY" min="0" max="20">
+<span>Sosyal</span>
+<input id="tytSosyalD" type="number" min="0" max="20">
+<input id="tytSosyalY" type="number" min="0" max="20">
 <span class="net" id="tytSosyalN">0</span>
 </div>
 
 <div class="subject">
-<span>Fen Bilimleri</span>
-<input type="number" id="tytFenD" min="0" max="20">
-<input type="number" id="tytFenY" min="0" max="20">
+<span>Fen</span>
+<input id="tytFenD" type="number" min="0" max="20">
+<input id="tytFenY" type="number" min="0" max="20">
 <span class="net" id="tytFenN">0</span>
 </div>
+
 </div>
 
 <div class="section">
-<h2>🔢 AYT - Sayısal</h2>
 
-<div class="subject">
-<strong>Ders</strong>
-<strong>Doğru</strong>
-<strong>Yanlış</strong>
-<strong>Net</strong>
-</div>
+<h2>🔢 AYT Sayısal</h2>
 
 <div class="subject">
 <span>Matematik</span>
-<input type="number" id="aytMatD" min="0" max="40">
-<input type="number" id="aytMatY" min="0" max="40">
+<input id="aytMatD" type="number" min="0" max="40">
+<input id="aytMatY" type="number" min="0" max="40">
 <span class="net" id="aytMatN">0</span>
 </div>
 
 <div class="subject">
-<span>Fen Bilimleri</span>
-<input type="number" id="aytFenD" min="0" max="40">
-<input type="number" id="aytFenY" min="0" max="40">
+<span>Fen</span>
+<input id="aytFenD" type="number" min="0" max="40">
+<input id="aytFenY" type="number" min="0" max="40">
 <span class="net" id="aytFenN">0</span>
 </div>
+
 </div>
 
 <div class="section">
-<h2>📖 AYT - Eşit Ağırlık / Sözel</h2>
 
-<div class="subject">
-<strong>Ders</strong>
-<strong>Doğru</strong>
-<strong>Yanlış</strong>
-<strong>Net</strong>
-</div>
+<h2>📚 AYT EA / Sözel</h2>
 
 <div class="subject">
 <span>Edebiyat</span>
-<input type="number" id="aytEdebD" min="0" max="24">
-<input type="number" id="aytEdebY" min="0" max="24">
+<input id="aytEdebD" type="number" min="0" max="24">
+<input id="aytEdebY" type="number" min="0" max="24">
 <span class="net" id="aytEdebN">0</span>
 </div>
 
 <div class="subject">
 <span>Tarih-1</span>
-<input type="number" id="aytTarih1D" min="0" max="10">
-<input type="number" id="aytTarih1Y" min="0" max="10">
+<input id="aytTarih1D" type="number" min="0" max="10">
+<input id="aytTarih1Y" type="number" min="0" max="10">
 <span class="net" id="aytTarih1N">0</span>
 </div>
 
 <div class="subject">
 <span>Coğrafya-1</span>
-<input type="number" id="aytCografya1D" min="0" max="6">
-<input type="number" id="aytCografya1Y" min="0" max="6">
+<input id="aytCografya1D" type="number" min="0" max="6">
+<input id="aytCografya1Y" type="number" min="0" max="6">
 <span class="net" id="aytCografya1N">0</span>
 </div>
 
-<div class="subject">
-<span>Tarih-2</span>
-<input type="number" id="aytTarih2D" min="0" max="11">
-<input type="number" id="aytTarih2Y" min="0" max="11">
-<span class="net" id="aytTarih2N">0</span>
 </div>
 
-<div class="subject">
-<span>Coğrafya-2</span>
-<input type="number" id="aytCografya2D" min="0" max="11">
-<input type="number" id="aytCografya2Y" min="0" max="11">
-<span class="net" id="aytCografya2N">0</span>
-</div>
-</div>
+<button onclick="hesapla()">
+🧮 NETLERİ HESAPLA
+</button>
 
-<button onclick="hesapla()">🧮 SONUÇLARI HESAPLA</button>
-
-<div class="result" id="sonuc">
+<div id="sonuc" class="result">
 
 <h2>🎉 Sonuçların</h2>
 
-<p id="tytToplam"></p>
-<p id="aytSayisal"></p>
-<p id="aytEaSoz"></p>
+<p id="tytSonuc"></p>
+<p id="saySonuc"></p>
+<p id="eaSonuc"></p>
 
-<h2 style="margin-top:25px;">🎓 Üniversite ve Bölüm Önerileri</h2>
+</div>
 
-<div id="universiteSonuclari"></div>
+<div class="section">
 
-<p style="font-size:13px;color:#666;margin-top:20px;">
-⚠️ Puan ve sıralama tahminleri yaklaşık değerlerdir.
-Resmî ÖSYM sonucu değildir.
-</p>
+<h2>🎓 Üniversite / Bölüm Ara</h2>
+
+<input
+    class="search"
+    id="arama"
+    placeholder="Bölüm veya üniversite yaz..."
+>
+
+<button onclick="ara()">
+🔎 UYGUN PROGRAMLARI GÖSTER
+</button>
+
+<div id="programListesi"></div>
 
 </div>
 
 </div>
+
+<script src="universiteler.js"></script>
 
 <script>
 
-const dersler = {
-
-    tytTurkceD:40,
-    tytTurkceY:40,
-
-    tytMatD:40,
-    tytMatY:40,
-
-    tytSosyalD:20,
-    tytSosyalY:20,
-
-    tytFenD:20,
-    tytFenY:20,
-
-    aytMatD:40,
-    aytMatY:40,
-
-    aytFenD:40,
-    aytFenY:40,
-
-    aytEdebD:24,
-    aytEdebY:24,
-
-    aytTarih1D:10,
-    aytTarih1Y:10,
-
-    aytCografya1D:6,
-    aytCografya1Y:6,
-
-    aytTarih2D:11,
-    aytTarih2Y:11,
-
-    aytCografya2D:11,
-    aytCografya2Y:11
-};
-
-function sayi(id){
-
+function say(id){
     return Number(document.getElementById(id).value) || 0;
-
 }
 
 function net(d,y){
-
-    return d - y / 4;
-
+    return d-(y/4);
 }
 
 function kontrol(){
 
-    const hata = document.getElementById("hata");
-
-    hata.style.display = "none";
-
-    const obp = sayi("obp");
-
-    if(obp < 0 || obp > 500){
-
-        hata.textContent = "❌ OBP 0 ile 500 arasında olmalıdır.";
-        hata.style.display = "block";
-
-        return false;
-    }
-
-    const gruplar = [
+    const dersler=[
         ["tytTurkceD","tytTurkceY",40,"TYT Türkçe"],
         ["tytMatD","tytMatY",40,"TYT Matematik"],
         ["tytSosyalD","tytSosyalY",20,"TYT Sosyal"],
         ["tytFenD","tytFenY",20,"TYT Fen"],
-
         ["aytMatD","aytMatY",40,"AYT Matematik"],
         ["aytFenD","aytFenY",40,"AYT Fen"],
-
         ["aytEdebD","aytEdebY",24,"AYT Edebiyat"],
         ["aytTarih1D","aytTarih1Y",10,"AYT Tarih-1"],
-        ["aytCografya1D","aytCografya1Y",6,"AYT Coğrafya-1"],
-
-        ["aytTarih2D","aytTarih2Y",11,"AYT Tarih-2"],
-        ["aytCografya2D","aytCografya2Y",11,"AYT Coğrafya-2"]
+        ["aytCografya1D","aytCografya1Y",6,"AYT Coğrafya-1"]
     ];
 
-    for(const grup of gruplar){
+    for(const d of dersler){
 
-        const dogru = sayi(grup[0]);
-        const yanlis = sayi(grup[1]);
-        const toplam = grup[2];
+        const dogru=say(d[0]);
+        const yanlis=say(d[1]);
 
-        if(dogru < 0 || yanlis < 0 || dogru + yanlis > toplam){
+        if(dogru+yanlis>d[2]){
 
-            hata.textContent =
-                "❌ " + grup[3] +
-                " için doğru + yanlış toplamı " +
-                toplam +
-                " soruyu geçemez.";
+            const hata=document.getElementById("hata");
 
-            hata.style.display = "block";
+            hata.innerText=
+            "❌ "+d[3]+" için doğru + yanlış "+d[2]+" soruyu geçemez.";
+
+            hata.style.display="block";
 
             return false;
         }
     }
+
+    document.getElementById("hata").style.display="none";
 
     return true;
 }
@@ -407,167 +335,85 @@ function hesapla(){
 
     if(!kontrol()) return;
 
-    const tytTurkce = net(sayi("tytTurkceD"),sayi("tytTurkceY"));
-    const tytMat = net(sayi("tytMatD"),sayi("tytMatY"));
-    const tytSosyal = net(sayi("tytSosyalD"),sayi("tytSosyalY"));
-    const tytFen = net(sayi("tytFenD"),sayi("tytFenY"));
+    const tyt=
+        net(say("tytTurkceD"),say("tytTurkceY"))+
+        net(say("tytMatD"),say("tytMatY"))+
+        net(say("tytSosyalD"),say("tytSosyalY"))+
+        net(say("tytFenD"),say("tytFenY"));
 
-    const aytMat = net(sayi("aytMatD"),sayi("aytMatY"));
-    const aytFen = net(sayi("aytFenD"),sayi("aytFenY"));
+    const sayisal=
+        net(say("aytMatD"),say("aytMatY"))+
+        net(say("aytFenD"),say("aytFenY"));
 
-    const aytEdeb = net(sayi("aytEdebD"),sayi("aytEdebY"));
-    const aytTarih1 = net(sayi("aytTarih1D"),sayi("aytTarih1Y"));
-    const aytCografya1 = net(sayi("aytCografya1D"),sayi("aytCografya1Y"));
-    const aytTarih2 = net(sayi("aytTarih2D"),sayi("aytTarih2Y"));
-    const aytCografya2 = net(sayi("aytCografya2D"),sayi("aytCografya2Y"));
+    const ea=
+        net(say("aytEdebD"),say("aytEdebY"))+
+        net(say("aytTarih1D"),say("aytTarih1Y"))+
+        net(say("aytCografya1D"),say("aytCografya1Y"));
 
-    const tyt =
-        tytTurkce +
-        tytMat +
-        tytSosyal +
-        tytFen;
+    document.getElementById("tytTurkceN").innerText=
+        net(say("tytTurkceD"),say("tytTurkceY")).toFixed(2);
 
-    const sayisal =
-        aytMat +
-        aytFen;
+    document.getElementById("tytMatN").innerText=
+        net(say("tytMatD"),say("tytMatY")).toFixed(2);
 
-    const eaSoz =
-        aytEdeb +
-        aytTarih1 +
-        aytCografya1 +
-        aytTarih2 +
-        aytCografya2;
+    document.getElementById("tytSosyalN").innerText=
+        net(say("tytSosyalD"),say("tytSosyalY")).toFixed(2);
 
-    document.getElementById("tytTurkceN").textContent=tytTurkce.toFixed(2);
-    document.getElementById("tytMatN").textContent=tytMat.toFixed(2);
-    document.getElementById("tytSosyalN").textContent=tytSosyal.toFixed(2);
-    document.getElementById("tytFenN").textContent=tytFen.toFixed(2);
+    document.getElementById("tytFenN").innerText=
+        net(say("tytFenD"),say("tytFenY")).toFixed(2);
 
-    document.getElementById("aytMatN").textContent=aytMat.toFixed(2);
-    document.getElementById("aytFenN").textContent=aytFen.toFixed(2);
+    document.getElementById("aytMatN").innerText=
+        net(say("aytMatD"),say("aytMatY")).toFixed(2);
 
-    document.getElementById("aytEdebN").textContent=aytEdeb.toFixed(2);
-    document.getElementById("aytTarih1N").textContent=aytTarih1.toFixed(2);
-    document.getElementById("aytCografya1N").textContent=aytCografya1.toFixed(2);
-    document.getElementById("aytTarih2N").textContent=aytTarih2.toFixed(2);
-    document.getElementById("aytCografya2N").textContent=aytCografya2.toFixed(2);
+    document.getElementById("aytFenN").innerText=
+        net(say("aytFenD"),say("aytFenY")).toFixed(2);
 
-    document.getElementById("tytToplam").textContent =
-        "🎯 TYT Toplam Net: " + tyt.toFixed(2);
+    document.getElementById("aytEdebN").innerText=
+        net(say("aytEdebD"),say("aytEdebY")).toFixed(2);
 
-    document.getElementById("aytSayisal").textContent =
-        "🔢 AYT Sayısal Net: " + sayisal.toFixed(2);
+    document.getElementById("aytTarih1N").innerText=
+        net(say("aytTarih1D"),say("aytTarih1Y")).toFixed(2);
 
-    document.getElementById("aytEaSoz").textContent =
-        "📖 AYT EA / Sözel Net: " + eaSoz.toFixed(2);
+    document.getElementById("aytCografya1N").innerText=
+        net(say("aytCografya1D"),say("aytCografya1Y")).toFixed(2);
 
-    document.getElementById("universiteSonuclari").innerHTML = `
-        <div class="kart">
-            📊 <strong>Üniversite eşleştirme sistemi hazırlanıyor.</strong>
-            <br><br>
-            Netlerine göre Türkiye'deki devlet, vakıf,
-            açıköğretim ve uzaktan öğretim programları
-            burada listelenecek.
-        </div>
-    `;
+    document.getElementById("tytSonuc").innerText=
+        "🎯 TYT Net: "+tyt.toFixed(2);
+
+    document.getElementById("saySonuc").innerText=
+        "🔢 AYT Sayısal Net: "+sayisal.toFixed(2);
+
+    document.getElementById("eaSonuc").innerText=
+        "📚 AYT EA Net: "+ea.toFixed(2);
 
     document.getElementById("sonuc").style.display="block";
-
-    document.getElementById("sonuc").scrollIntoView({
-        behavior:"smooth"
-    });
 }
 
-</script>
-<div class="section" id="tercihPaneli">
+function ara(){
 
-<h2>🎓 Üniversite & Bölüm Arama</h2>
+    const kelime=
+        document.getElementById("arama").value
+        .toLocaleLowerCase("tr-TR")
+        .trim();
 
-<input
-    type="text"
-    id="arama"
-    placeholder="🔎 Bölüm veya üniversite ara..."
-    style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;"
->
+    const liste=document.getElementById("programListesi");
 
-<select id="universiteTuru"
-style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
-<option value="hepsi">🏫 Tüm Üniversiteler</option>
-<option value="devlet">🏛️ Devlet</option>
-<option value="vakif">🏫 Vakıf</option>
-<option value="acik">📚 Açıköğretim</option>
-<option value="uzaktan">💻 Uzaktan Öğretim</option>
-</select>
+    const veriler=window.programVerileri || [];
 
-<select id="puanTuru"
-style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
-<option value="hepsi">📊 Tüm Puan Türleri</option>
-<option value="TYT">TYT</option>
-<option value="SAY">SAY</option>
-<option value="EA">EA</option>
-<option value="SÖZ">SÖZ</option>
-<option value="DİL">DİL</option>
-</select>
+    const sonuc=veriler.filter(p=>
+        p.universite.toLocaleLowerCase("tr-TR").includes(kelime) ||
+        p.bolum.toLocaleLowerCase("tr-TR").includes(kelime)
+    );
 
-<select id="sonucYili"
-style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
-<option value="2025">2025</option>
-<option value="2024">2024</option>
-<option value="2023">2023</option>
-</select>
+    if(sonuc.length===0){
 
-<button onclick="programlariGoster()">
-🔎 Uygun Bölümleri Göster
-</button>
-
-<div id="programListesi"></div>
-
-</div>
-
-<script>
-
-
-function programlariGoster(){
-
-    const arama =
-        document.getElementById("arama").value.toLowerCase();
-
-    const tur =
-        document.getElementById("universiteTuru").value;
-
-    const puan =
-        document.getElementById("puanTuru").value;
-
-    const liste =
-        document.getElementById("programListesi");
-
-    let sonuclar = programVerileri.filter(p => {
-
-        const aramaUygun =
-            p.universite.toLowerCase().includes(arama) ||
-            p.bolum.toLowerCase().includes(arama) ||
-            p.sehir.toLowerCase().includes(arama);
-
-        const turUygun =
-            tur === "hepsi" || p.tur === tur;
-
-        const puanUygun =
-            puan === "hepsi" || p.puan === puan;
-
-        return aramaUygun && turUygun && puanUygun;
-    });
-
-    if(sonuclar.length === 0){
-
-        liste.innerHTML = `
-        <div class="kart">
-            ❌ Uygun program bulunamadı.
-        </div>`;
+        liste.innerHTML=
+        '<div class="kart">❌ Uygun program bulunamadı.</div>';
 
         return;
     }
 
-    liste.innerHTML = sonuclar.map(p => `
+    liste.innerHTML=sonuc.map(p=>`
 
         <div class="kart">
 
@@ -577,12 +423,14 @@ function programlariGoster(){
 
             <p>📍 ${p.sehir}</p>
 
-            <p>📊 Puan Türü: <strong>${p.puan}</strong></p>
+            <p>📊 Puan Türü: ${p.puan}</p>
 
-            <p>
-            📈 2025 Başarı Sırası:
-            <strong>${p.siralama2025.toLocaleString("tr-TR")}</strong>
-            </p>
+            <p>🏛️ Üniversite Türü: ${p.tur}</p>
+
+            <p>📚 Öğretim: ${p.ogretim}</p>
+
+            <p>📈 2025 Sıralama:
+            ${p.siralama2025 ?? "Veri yok"}</p>
 
         </div>
 
@@ -590,12 +438,6 @@ function programlariGoster(){
 }
 
 </script>
-<script src="universiteler.js"></script>
-     <script>
-if (window.programVerileri) {
-    programVerileri.length = 0;
-    programVerileri.push(...window.programVerileri);
-}
-</script>
+
 </body>
 </html>

@@ -479,6 +479,142 @@ function hesapla(){
 }
 
 </script>
+<div class="section" id="tercihPaneli">
 
+<h2>🎓 Üniversite & Bölüm Arama</h2>
+
+<input
+    type="text"
+    id="arama"
+    placeholder="🔎 Bölüm veya üniversite ara..."
+    style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;"
+>
+
+<select id="universiteTuru"
+style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
+<option value="hepsi">🏫 Tüm Üniversiteler</option>
+<option value="devlet">🏛️ Devlet</option>
+<option value="vakif">🏫 Vakıf</option>
+<option value="acik">📚 Açıköğretim</option>
+<option value="uzaktan">💻 Uzaktan Öğretim</option>
+</select>
+
+<select id="puanTuru"
+style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
+<option value="hepsi">📊 Tüm Puan Türleri</option>
+<option value="TYT">TYT</option>
+<option value="SAY">SAY</option>
+<option value="EA">EA</option>
+<option value="SÖZ">SÖZ</option>
+<option value="DİL">DİL</option>
+</select>
+
+<select id="sonucYili"
+style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
+<option value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+</select>
+
+<button onclick="programlariGoster()">
+🔎 Uygun Bölümleri Göster
+</button>
+
+<div id="programListesi"></div>
+
+</div>
+
+<script>
+
+const programVerileri = [
+    {
+        universite:"Örnek Devlet Üniversitesi",
+        bolum:"Yönetim Bilişim Sistemleri",
+        tur:"devlet",
+        puan:"EA",
+        sehir:"Ankara",
+        siralama2025:150000
+    },
+    {
+        universite:"Örnek Devlet Üniversitesi",
+        bolum:"Bilgisayar Programcılığı",
+        tur:"devlet",
+        puan:"TYT",
+        sehir:"Samsun",
+        siralama2025:300000
+    },
+    {
+        universite:"Örnek Vakıf Üniversitesi",
+        bolum:"Yönetim Bilişim Sistemleri",
+        tur:"vakif",
+        puan:"EA",
+        sehir:"İstanbul",
+        siralama2025:250000
+    }
+];
+
+function programlariGoster(){
+
+    const arama =
+        document.getElementById("arama").value.toLowerCase();
+
+    const tur =
+        document.getElementById("universiteTuru").value;
+
+    const puan =
+        document.getElementById("puanTuru").value;
+
+    const liste =
+        document.getElementById("programListesi");
+
+    let sonuclar = programVerileri.filter(p => {
+
+        const aramaUygun =
+            p.universite.toLowerCase().includes(arama) ||
+            p.bolum.toLowerCase().includes(arama) ||
+            p.sehir.toLowerCase().includes(arama);
+
+        const turUygun =
+            tur === "hepsi" || p.tur === tur;
+
+        const puanUygun =
+            puan === "hepsi" || p.puan === puan;
+
+        return aramaUygun && turUygun && puanUygun;
+    });
+
+    if(sonuclar.length === 0){
+
+        liste.innerHTML = `
+        <div class="kart">
+            ❌ Uygun program bulunamadı.
+        </div>`;
+
+        return;
+    }
+
+    liste.innerHTML = sonuclar.map(p => `
+
+        <div class="kart">
+
+            <h3>🎓 ${p.bolum}</h3>
+
+            <p>🏫 ${p.universite}</p>
+
+            <p>📍 ${p.sehir}</p>
+
+            <p>📊 Puan Türü: <strong>${p.puan}</strong></p>
+
+            <p>
+            📈 2025 Başarı Sırası:
+            <strong>${p.siralama2025.toLocaleString("tr-TR")}</strong>
+            </p>
+
+        </div>
+
+    `).join("");
+}
+
+</script>
 </body>
 </html>

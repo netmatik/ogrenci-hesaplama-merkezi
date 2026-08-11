@@ -591,5 +591,11 @@ function programlariGoster(){
 
 </script>
 <script src="universiteler.js"></script>
+     <script>
+if (window.programVerileri) {
+    programVerileri.length = 0;
+    programVerileri.push(...window.programVerileri);
+}
+</script>
 </body>
 </html>

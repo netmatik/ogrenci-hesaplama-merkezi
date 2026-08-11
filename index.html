@@ -1,42 +1,167 @@
 <!DOCTYPE html>
-
 <html lang="tr">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>NetMatik - Öğrenci Hesaplama Merkezi</title>
 
     <style>
-
         * {
-
             box-sizing: border-box;
-
             margin: 0;
-
             padding: 0;
-
         }
 
         body {
-
             font-family: Arial, sans-serif;
-
             background: #f4f7fb;
-
             color: #172033;
-
         }
 
         header {
-
             background: #3157d5;
-
             color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
 
-            padding: 25px 20px;
-        
+        header h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            color: #666;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #3157d5;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #2443aa;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #172033;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🎓 NetMatik</h1>
+        <p>Öğrenci Hesaplama Merkezi</p>
+    </header>
+
+    <main class="container">
+
+        <div class="title">
+            <h2>Hesaplama Merkezi</h2>
+            <p>Sınavını seç ve hesaplamaya başla.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">🎯</div>
+                <h3>YKS</h3>
+                <p>TYT ve AYT netlerini hesapla.</p>
+                <a href="#" class="button">Hesapla</a>
+            </div>
+
+            <div class="card">
+                <div class="icon">📚</div>
+                <h3>KPSS</h3>
+                <p>KPSS netlerini hesapla.</p>
+                <a href="#" class="button">Hesapla</a>
+            </div>
+
+            <div class="card">
+                <div class="icon">🎓</div>
+                <h3>DGS</h3>
+                <p>DGS netlerini hesapla.</p>
+                <a href="#" class="button">Hesapla</a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 NetMatik - Öğrenci Hesaplama Merkezi</p>
+    </footer>
+
+</body>
+</html>

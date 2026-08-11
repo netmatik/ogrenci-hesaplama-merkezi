@@ -21,3 +21,4 @@ const universiteler = [
         }
     }
 ];
+console.log(universiteler);

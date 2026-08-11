@@ -1,167 +1,288 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetMatik - YKS Hesaplama</title>
 
-    <title>NetMatik - Öğrenci Hesaplama Merkezi</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #172033;
-        }
+header {
+    background: #3157d5;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
 
-        header {
-            background: #3157d5;
-            color: white;
-            padding: 35px 20px;
-            text-align: center;
-        }
+header h1 {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
 
-        header h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
 
-        header p {
-            font-size: 18px;
-        }
+.section {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+.section h2 {
+    color: #3157d5;
+    margin-bottom: 20px;
+}
 
-        .title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+.subject {
+    display: grid;
+    grid-template-columns: 1fr 100px 100px 100px;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+}
 
-        .title h2 {
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
+.subject input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+}
 
-        .title p {
-            color: #666;
-        }
+.net {
+    font-weight: bold;
+    text-align: center;
+    color: #3157d5;
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+button {
+    background: #3157d5;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        .card {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 18px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
+button:hover {
+    background: #2443aa;
+}
 
-        .icon {
-            font-size: 45px;
-            margin-bottom: 15px;
-        }
+.result {
+    display: none;
+    background: #eaf0ff;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
 
-        .card h3 {
-            font-size: 25px;
-            margin-bottom: 10px;
-        }
+.result h2 {
+    color: #3157d5;
+    margin-bottom: 10px;
+}
 
-        .card p {
-            color: #666;
-            margin-bottom: 20px;
-        }
+@media (max-width: 650px) {
+    .subject {
+        grid-template-columns: 1fr 70px 70px 70px;
+    }
 
-        .button {
-            display: inline-block;
-            background: #3157d5;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .button:hover {
-            background: #2443aa;
-        }
-
-        footer {
-            margin-top: 50px;
-            background: #172033;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-
-        @media (max-width: 700px) {
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            header h1 {
-                font-size: 32px;
-            }
-        }
-    </style>
+    .subject input {
+        padding: 8px 3px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h1>🎓 NetMatik</h1>
-        <p>Öğrenci Hesaplama Merkezi</p>
-    </header>
+<header>
+    <h1>🎓 NetMatik</h1>
+    <p>YKS Net Hesaplama Merkezi</p>
+</header>
 
-    <main class="container">
+<div class="container">
 
-        <div class="title">
-            <h2>Hesaplama Merkezi</h2>
-            <p>Sınavını seç ve hesaplamaya başla.</p>
+    <div class="section">
+        <h2>🎯 TYT</h2>
+
+        <div class="subject">
+            <strong>Ders</strong>
+            <strong>Doğru</strong>
+            <strong>Yanlış</strong>
+            <strong>Net</strong>
         </div>
 
-        <div class="cards">
-
-            <div class="card">
-                <div class="icon">🎯</div>
-                <h3>YKS</h3>
-                <p>TYT ve AYT netlerini hesapla.</p>
-                <a href="#" class="button">Hesapla</a>
-            </div>
-
-            <div class="card">
-                <div class="icon">📚</div>
-                <h3>KPSS</h3>
-                <p>KPSS netlerini hesapla.</p>
-                <a href="#" class="button">Hesapla</a>
-            </div>
-
-            <div class="card">
-                <div class="icon">🎓</div>
-                <h3>DGS</h3>
-                <p>DGS netlerini hesapla.</p>
-                <a href="#" class="button">Hesapla</a>
-            </div>
-
+        <div class="subject">
+            <span>Türkçe</span>
+            <input type="number" id="tytTurkceD" min="0">
+            <input type="number" id="tytTurkceY" min="0">
+            <span class="net" id="tytTurkceN">0</span>
         </div>
 
-    </main>
+        <div class="subject">
+            <span>Matematik</span>
+            <input type="number" id="tytMatD" min="0">
+            <input type="number" id="tytMatY" min="0">
+            <span class="net" id="tytMatN">0</span>
+        </div>
 
-    <footer>
-        <p>© 2026 NetMatik - Öğrenci Hesaplama Merkezi</p>
-    </footer>
+        <div class="subject">
+            <span>Sosyal Bilimler</span>
+            <input type="number" id="tytSosyalD" min="0">
+            <input type="number" id="tytSosyalY" min="0">
+            <span class="net" id="tytSosyalN">0</span>
+        </div>
+
+        <div class="subject">
+            <span>Fen Bilimleri</span>
+            <input type="number" id="tytFenD" min="0">
+            <input type="number" id="tytFenY" min="0">
+            <span class="net" id="tytFenN">0</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📚 AYT</h2>
+
+        <div class="subject">
+            <strong>Ders</strong>
+            <strong>Doğru</strong>
+            <strong>Yanlış</strong>
+            <strong>Net</strong>
+        </div>
+
+        <div class="subject">
+            <span>Matematik</span>
+            <input type="number" id="aytMatD" min="0">
+            <input type="number" id="aytMatY" min="0">
+            <span class="net" id="aytMatN">0</span>
+        </div>
+
+        <div class="subject">
+            <span>Edebiyat-Sosyal 1</span>
+            <input type="number" id="aytEdebD" min="0">
+            <input type="number" id="aytEdebY" min="0">
+            <span class="net" id="aytEdebN">0</span>
+        </div>
+
+        <div class="subject">
+            <span>Fen Bilimleri</span>
+            <input type="number" id="aytFenD" min="0">
+            <input type="number" id="aytFenY" min="0">
+            <span class="net" id="aytFenN">0</span>
+        </div>
+
+        <div class="subject">
+            <span>Sosyal Bilimler 2</span>
+            <input type="number" id="aytSosyalD" min="0">
+            <input type="number" id="aytSosyalY" min="0">
+            <span class="net" id="aytSosyalN">0</span>
+        </div>
+    </div>
+
+    <div style="text-align:center;">
+        <button onclick="hesapla()">🧮 Netlerimi Hesapla</button>
+    </div>
+
+    <div class="result" id="sonuc">
+        <h2>🎉 Sonuçların</h2>
+        <p id="tytSonuc"></p>
+        <p id="aytSonuc"></p>
+        <p><strong>Not:</strong> Net hesabı 4 yanlış = 1 doğru şeklindedir.</p>
+    </div>
+
+</div>
+
+<script>
+function netHesapla(d, y) {
+    d = Number(d) || 0;
+    y = Number(y) || 0;
+    return d - (y / 4);
+}
+
+function hesapla() {
+
+    let tytTurkce = netHesapla(
+        document.getElementById("tytTurkceD").value,
+        document.getElementById("tytTurkceY").value
+    );
+
+    let tytMat = netHesapla(
+        document.getElementById("tytMatD").value,
+        document.getElementById("tytMatY").value
+    );
+
+    let tytSosyal = netHesapla(
+        document.getElementById("tytSosyalD").value,
+        document.getElementById("tytSosyalY").value
+    );
+
+    let tytFen = netHesapla(
+        document.getElementById("tytFenD").value,
+        document.getElementById("tytFenY").value
+    );
+
+    let aytMat = netHesapla(
+        document.getElementById("aytMatD").value,
+        document.getElementById("aytMatY").value
+    );
+
+    let aytEdeb = netHesapla(
+        document.getElementById("aytEdebD").value,
+        document.getElementById("aytEdebY").value
+    );
+
+    let aytFen = netHesapla(
+        document.getElementById("aytFenD").value,
+        document.getElementById("aytFenY").value
+    );
+
+    let aytSosyal = netHesapla(
+        document.getElementById("aytSosyalD").value,
+        document.getElementById("aytSosyalY").value
+    );
+
+    document.getElementById("tytTurkceN").textContent = tytTurkce.toFixed(2);
+    document.getElementById("tytMatN").textContent = tytMat.toFixed(2);
+    document.getElementById("tytSosyalN").textContent = tytSosyal.toFixed(2);
+    document.getElementById("tytFenN").textContent = tytFen.toFixed(2);
+
+    document.getElementById("aytMatN").textContent = aytMat.toFixed(2);
+    document.getElementById("aytEdebN").textContent = aytEdeb.toFixed(2);
+    document.getElementById("aytFenN").textContent = aytFen.toFixed(2);
+    document.getElementById("aytSosyalN").textContent = aytSosyal.toFixed(2);
+
+    let toplamTyt = tytTurkce + tytMat + tytSosyal + tytFen;
+    let toplamAyt = aytMat + aytEdeb + aytFen + aytSosyal;
+
+    document.getElementById("tytSonuc").textContent =
+        "TYT Toplam Net: " + toplamTyt.toFixed(2);
+
+    document.getElementById("aytSonuc").textContent =
+        "AYT Toplam Net: " + toplamAyt.toFixed(2);
+
+    document.getElementById("sonuc").style.display = "block";
+}
+</script>
 
 </body>
 </html>

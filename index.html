@@ -268,7 +268,7 @@ button {
 
 </div>
 
-<button onclick="hesapla()">🧮 SONUÇLARI HESAPLA</button>
+<button onclick="kontrolluHesapla()">🧮 SONUÇLARI HESAPLA</button>
 
 <div class="result" id="sonuc">
 
@@ -590,6 +590,35 @@ document.addEventListener("input", function(e) {
         }
     }
 });
+</script>
+<script>
+function kontrolluHesapla() {
+
+    const dersler = [
+        ["tytTurkceD", "tytTurkceY", 40, "TYT Türkçe"],
+        ["tytMatD", "tytMatY", 40, "TYT Matematik"],
+        ["tytSosyalD", "tytSosyalY", 20, "TYT Sosyal"],
+        ["tytFenD", "tytFenY", 20, "TYT Fen"],
+        ["aytMatD", "aytMatY", 40, "AYT Matematik"],
+        ["aytFenD", "aytFenY", 40, "AYT Fen"],
+        ["aytEdebD", "aytEdebY", 24, "AYT Edebiyat"],
+        ["aytTarih1D", "aytTarih1Y", 10, "AYT Tarih-1"],
+        ["aytCografya1D", "aytCografya1Y", 6, "AYT Coğrafya-1"]
+    ];
+
+    for (const ders of dersler) {
+
+        const dogru = Number(document.getElementById(ders[0]).value) || 0;
+        const yanlis = Number(document.getElementById(ders[1]).value) || 0;
+
+        if (dogru + yanlis > ders[2]) {
+            alert("❌ " + ders[3] + " için toplam doğru + yanlış " + ders[2] + " soruyu geçemez!");
+            return;
+        }
+    }
+
+    hesapla();
+}
 </script>
 </body>
 </html>

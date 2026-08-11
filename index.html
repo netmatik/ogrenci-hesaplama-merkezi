@@ -400,10 +400,72 @@ function hesapla() {
 <div id="universiteSonuclari"></div>
 
 <script>
-function universiteGoster() {
-    const alan = document.getElementById("universiteSonuclari");
+function universiteOner() {
+    const tyt =
+        (Number(document.getElementById("tytTurkceD").value) || 0) -
+        ((Number(document.getElementById("tytTurkceY").value) || 0) / 4) +
+        (Number(document.getElementById("tytMatD").value) || 0) -
+        ((Number(document.getElementById("tytMatY").value) || 0) / 4) +
+        (Number(document.getElementById("tytSosyalD").value) || 0) -
+        ((Number(document.getElementById("tytSosyalY").value) || 0) / 4) +
+        (Number(document.getElementById("tytFenD").value) || 0) -
+        ((Number(document.getElementById("tytFenY").value) || 0) / 4);
 
-    alan.innerHTML = `
+    const aytMat =
+        (Number(document.getElementById("aytMatD").value) || 0) -
+        ((Number(document.getElementById("aytMatY").value) || 0) / 4);
+
+    const aytEdeb =
+        (Number(document.getElementById("aytEdebD").value) || 0) -
+        ((Number(document.getElementById("aytEdebY").value) || 0) / 4);
+
+    const aytTarih =
+        (Number(document.getElementById("aytTarih1D").value) || 0) -
+        ((Number(document.getElementById("aytTarih1Y").value) || 0) / 4);
+
+    const aytCografya =
+        (Number(document.getElementById("aytCografya1D").value) || 0) -
+        ((Number(document.getElementById("aytCografya1Y").value) || 0) / 4);
+
+    let bolumler = [];
+
+    if (aytMat >= 20) {
+        bolumler.push(
+            "💻 Yönetim Bilişim Sistemleri",
+            "💻 Bilgisayar Mühendisliği",
+            "📊 Endüstri Mühendisliği",
+            "🏗️ İnşaat Mühendisliği"
+        );
+    }
+
+    if (aytEdeb + aytTarih + aytCografya >= 15) {
+        bolumler.push(
+            "⚖️ Hukuk",
+            "📊 İşletme",
+            "💻 Yönetim Bilişim Sistemleri",
+            "💰 Ekonomi",
+            "🏛️ Siyaset Bilimi ve Kamu Yönetimi"
+        );
+    }
+
+    if (tyt >= 50) {
+        bolumler.push(
+            "🏥 Fizyoterapi",
+            "🍎 Beslenme ve Diyetetik",
+            "✈️ Havacılık Yönetimi",
+            "💻 Bilgisayar Programcılığı"
+        );
+    }
+
+    if (bolumler.length === 0) {
+        bolumler.push(
+            "📚 Daha fazla net yaparak seçeneklerini artırabilirsin."
+        );
+    }
+
+    bolumler = [...new Set(bolumler)];
+
+    const html = `
         <div style="
             background:white;
             padding:25px;
@@ -411,17 +473,39 @@ function universiteGoster() {
             border-radius:18px;
             box-shadow:0 5px 20px rgba(0,0,0,.08);
         ">
-            <h2 style="color:#3157d5;">🎓 Üniversite Önerisi</h2>
-            <p><strong>${universiteler[0].universite}</strong></p>
-            <p>📍 ${universiteler[0].sehir}</p>
-            <p>🎓 ${universiteler[0].bolum}</p>
-            <p>📚 Puan Türü: ${universiteler[0].puanTuru}</p>
-            <p>💰 ${universiteler[0].burs}</p>
+            <h2 style="color:#3157d5;text-align:center;">
+                🎓 Sana Uygun Bölümler
+            </h2>
+
+            <p style="text-align:center;margin:15px 0;">
+                TYT Netin: <strong>${tyt.toFixed(2)}</strong>
+            </p>
+
+            ${bolumler.map(bolum => `
+                <div style="
+                    padding:15px;
+                    margin:10px 0;
+                    border:1px solid #e1e5ee;
+                    border-radius:12px;
+                    background:#f8faff;
+                ">
+                    <strong>${bolum}</strong>
+                    <br>
+                    <small>🏫 Üniversiteler ve geçmiş yıllardaki sıralamalar</small>
+                </div>
+            `).join("")}
         </div>
     `;
+
+    document.getElementById("universiteSonuclari").innerHTML = html;
 }
 
-universiteGoster();
+const eskiHesapla = hesapla;
+
+hesapla = function() {
+    eskiHesapla();
+    universiteOner();
+};
 </script>
 </body>
 </html>

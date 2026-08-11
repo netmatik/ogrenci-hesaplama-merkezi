@@ -507,5 +507,32 @@ hesapla = function() {
     universiteOner();
 };
 </script>
+ <script>
+function soruKontrol() {
+    const dersler = [
+        ["tytTurkceD", "tytTurkceY", 40],
+        ["tytMatD", "tytMatY", 40],
+        ["tytSosyalD", "tytSosyalY", 20],
+        ["tytFenD", "tytFenY", 20],
+        ["aytMatD", "aytMatY", 40],
+        ["aytFenD", "aytFenY", 40],
+        ["aytEdebD", "aytEdebY", 24],
+        ["aytTarih1D", "aytTarih1Y", 10],
+        ["aytCografya1D", "aytCografya1Y", 6]
+    ];
+
+    for (const ders of dersler) {
+        const dogru = Number(document.getElementById(ders[0]).value) || 0;
+        const yanlis = Number(document.getElementById(ders[1]).value) || 0;
+
+        if (dogru + yanlis > ders[2]) {
+            alert("❌ Doğru + yanlış toplamı soru sayısından fazla olamaz!");
+            return false;
+        }
+    }
+
+    return true;
+}
+</script>   
 </body>
 </html>

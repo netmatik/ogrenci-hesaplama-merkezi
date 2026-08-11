@@ -397,5 +397,31 @@ function hesapla() {
 
 </script>
 <script src="universiteler.js"></script>
+<div id="universiteSonuclari"></div>
+
+<script>
+function universiteGoster() {
+    const alan = document.getElementById("universiteSonuclari");
+
+    alan.innerHTML = `
+        <div style="
+            background:white;
+            padding:25px;
+            margin-top:25px;
+            border-radius:18px;
+            box-shadow:0 5px 20px rgba(0,0,0,.08);
+        ">
+            <h2 style="color:#3157d5;">🎓 Üniversite Önerisi</h2>
+            <p><strong>${universiteler[0].universite}</strong></p>
+            <p>📍 ${universiteler[0].sehir}</p>
+            <p>🎓 ${universiteler[0].bolum}</p>
+            <p>📚 Puan Türü: ${universiteler[0].puanTuru}</p>
+            <p>💰 ${universiteler[0].burs}</p>
+        </div>
+    `;
+}
+
+universiteGoster();
+</script>
 </body>
 </html>
